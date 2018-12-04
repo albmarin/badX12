@@ -35,7 +35,7 @@ setup(
     include_package_data=True,
     keywords="badx12",
     name="badx12",
-    packages=find_packages(include=["badx12"]),
+    packages=find_packages(),
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
