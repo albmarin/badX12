@@ -1,49 +1,45 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""The setup script."""
+
 from setuptools import setup, find_packages
 
-from badX12.__project__ import author, author_email, version, homepage
+with open("README.rst") as readme_file:
+    readme = readme_file.read()
 
+with open("HISTORY.rst") as history_file:
+    history = history_file.read()
 
-def fread(filename):
-    with open(filename) as f:
-        return f.read()
+requirements = []
 
+setup_requirements = ["pytest-runner"]
+
+test_requirements = ["pytest"]
 
 setup(
-    name='badX12',
-    version=version,
-
-    author=author,
-    author_email=author_email,
-    url=homepage,
-    packages=find_packages(exclude=('tests', 'docs')),
-    description=(
-        'A Python API for parsing ANSI ASC X12 files.'
-    ),
-    zip_safe=False,
-    include_package_data=True,
-    platforms='any',
-    long_description=fread('README.rst'),
-    license=fread('LICENSE'),
-
-    install_requires=[
-    ],
-
-    project_urls={
-        'Bug Tracker': f'{homepage}/issues',
-        'Documentation': f'{homepage}/tree/master/docs',
-        'Source Code': f'{homepage}',
-    },
-
+    author="Alberto J. Marin",
+    author_email="alberto@ajmar.in",
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: Apache Software License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Programming Language :: Python" "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
-
-    keywords='x12 edi parser'
+    description="A Python Library for parsing ANSI ASC X12 files.",
+    install_requires=requirements,
+    license="MIT license",
+    long_description=readme + "\n\n" + history,
+    include_package_data=True,
+    keywords="badx12",
+    name="badx12",
+    packages=find_packages(include=["badx12"]),
+    setup_requires=setup_requirements,
+    test_suite="tests",
+    tests_require=test_requirements,
+    url="https://github.com/git-albertomarin/badx12",
+    version="0.1.0",
+    zip_safe=False,
 )

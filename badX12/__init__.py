@@ -1,15 +1,11 @@
-"""
-    badX12
-    ~~~~~~~~~~~~
+# -*- coding: utf-8 -*-
 
-    A Python API for parsing ANSI ASC X12 files.
-"""
-from .__project__ import version, homepage, author
-from .parsers import Parser
+"""Top-level package for badX12."""
+from .parser import Parser
+from .document import EDIDocument
 
-__all__ = ['Parser']
+__author__ = """Alberto J. Marin"""
+__email__ = "alberto@ajmar.in"
+__version__ = "0.1.0"
 
-__version__ = version
-__homepage__ = homepage
-__author__ = author
-__license__ = 'Apache-2.0'
+__all__ = ["Parser", "EDIDocument"]
