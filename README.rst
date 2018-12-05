@@ -28,8 +28,9 @@ Features
 
 * TODO
 
-Disclaimer
-_______
+Disclaimers
+-----------
+
 Please be aware that all edi files within the test directory are examples provided by x12.org
 
 Credits

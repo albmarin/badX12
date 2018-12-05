@@ -1,6 +1,6 @@
 badX12: A Python Library for parsing ANSI ASC X12 files.
 ======================================
-.. include:: ../README.rst
+.. include:: ./readme.rst
 
 
 .. toctree::
