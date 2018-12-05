@@ -6,40 +6,38 @@ badX12
 .. image:: https://img.shields.io/pypi/v/badX12.svg
         :target: https://pypi.python.org/pypi/badX12
 
-.. image:: https://img.shields.io/travis/git-albertomarin/badX12.svg
-        :target: https://travis-ci.org/git-albertomarin/badX12
-
 .. image:: https://codecov.io/gh/git-albertomarin/badX12/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/git-albertomarin/badX12
+
+.. image:: https://img.shields.io/travis/git-albertomarin/badX12.svg
+        :target: https://travis-ci.org/git-albertomarin/badX12
 
 .. image:: https://readthedocs.org/projects/badx12/badge/?version=latest
         :target: https://badX12.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
+        :target: https://en.wikipedia.org/wiki/MIT_License
 
 
 A Python Library for parsing ANSI ASC X12 files.
 
+A Simple Example
+----------------
 
-* Free software: MIT license
-* Documentation: https://badX12.readthedocs.io.
+.. code-block:: python
+    from badx12 import Parser
 
+    parser = Parser()
+    document = parser.parse_document("path-to-file/file.edi")
 
 Features
 --------
 
-* TODO
+* Parse x12 file format into a python object
 
-Disclaimers
------------
+Links
+-----
 
-Please be aware that all edi files within the test directory are examples provided by x12.org
-
-Credits
--------
-
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+* License: https://en.wikipedia.org/wiki/MIT_License
+* Documentation: https://badX12.readthedocs.io.
