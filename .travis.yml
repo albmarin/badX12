@@ -3,14 +3,15 @@ python:
 - 3.6
 install: pip install -U tox-travis
 script: tox
-deploy:
-  provider: pypi
-  user: albertomarin-pypi
-  password:
-    secure: HxwGZyLY3He5VGUdqHqplcJMvC8o4+nOyCXq6RvEVT5lcgk7wK+sWsWypB5UJRH/n0Aed2sf6kgUoccwBnZLyErrytsX0DD1MVcu1M1ePF5GnK6cFjTxLk9yMZyqYLJIjvIprsRgLSQLKomcJg5hwVMBgt1fSzq+Rf3cYx8b4ycOts949/2R8JkOJO2A+JLfOxwgHL7fb4BmbzbnFKvIovh9XraLqgdbEnG/lDg7og0VOnViqt20VfflZJ8wb3lNPnazx2bCc8utRRr3EZ0QbUsLe48ji2Ty8XjaQjie1pkAjcX+URNWI5k8x1o8Vx+m9Ulw3Zy6d15313BRhMUHA4LIFU31hDwURaj7cS3FJrrwNj3toOBcl12ISuXEWdbmo8wSnfu1NIPEtEzG7YKoFcmHAYh4MukpC1TCpZKEKTjOsOWMlbkR3LMPVsPXeusV9ZTPdS/oSDpzIirX6fPNMgyy2N0Xp1sMJ0aAiNcMd1PtmZpPcuogKBeXnjE4r+THOAqQrTW5C75XazKw4LgLRlEVLlcbJpHH9oNdhuD6/bMSpRSMlHNykv7PvJSITGfbgxQX4WShQKP1Tf2lxMZu8pj871n6trFjrr/byGiyF282H5Ji3qRGogjk9lDg82fNFriT6L6ckmojZIYp8SPCgym3SzJD/CoJp/BbZ8/PxSI=
-  on:
-    tags: true
-    repo: git-albertomarin/badX12
-    branch: master
-    python: 3.6
-    skip_cleanup: true
+#deploy:
+#  provider: pypi
+#  user:
+#    secure: FQHgqBb3CGlUamUjhVFE9NQdNIxbuCneOeDjPnFAEhTx8FGx2zUgunbUOrO9y10xQBViVTd8yx1NZJTA2AxjXgg+N6LG29eVioKKY4F9I/rpa0K/WMXd2OsebwEKKEcokYJTarLc+85zodN+/3EbIPPnaPueslvvCjDanGCFSuFNwqtFzq62roR7NI4aEXhwgjERCEWbuyMrwT3/J9ffWkY/vw5YVji/vPQ7Dn5nyy8KfkGmikbYlDrzu1KanRgLNPebZp0v85SClvfpQnVeilOifJU2b6SCAP+RTwVF0TW/IjHc4WZQtSGlnjBmLM8/wMoOZHGPEIWcerisGVQLK6YEQUqeEO86pWSc/+7ARe72nfYwuhiVwGxe5hY3na8wYXyAbHE7KFM27UVAqlXSe2RLk0n0DblA5e3YFRGofFGshuHqniPRbrYvvPygZhaTjM1X68xzSDQV9TxuHiM4FXlu0oMpwrtRwPchxRJZ5IdSxCNDU5AgeVCs2r8n5pZt/TWG5yr0x2V6t7wx2UuJ8ZrXQ/Zl7p/pMX9OrUy5rAelD56kCWrPsZlYHAhmblxGXviwEWPHyjs5pWkMDmOX5G3FotWsCkw5spF/r6qt4B/AOgJqfqwyD4eHb22JP9LXiLGRf5CU0NS7zuuTlfiVkXWVf0msyOjx6UbVZj7BMG4=
+#  password:
+#    secure: HxwGZyLY3He5VGUdqHqplcJMvC8o4+nOyCXq6RvEVT5lcgk7wK+sWsWypB5UJRH/n0Aed2sf6kgUoccwBnZLyErrytsX0DD1MVcu1M1ePF5GnK6cFjTxLk9yMZyqYLJIjvIprsRgLSQLKomcJg5hwVMBgt1fSzq+Rf3cYx8b4ycOts949/2R8JkOJO2A+JLfOxwgHL7fb4BmbzbnFKvIovh9XraLqgdbEnG/lDg7og0VOnViqt20VfflZJ8wb3lNPnazx2bCc8utRRr3EZ0QbUsLe48ji2Ty8XjaQjie1pkAjcX+URNWI5k8x1o8Vx+m9Ulw3Zy6d15313BRhMUHA4LIFU31hDwURaj7cS3FJrrwNj3toOBcl12ISuXEWdbmo8wSnfu1NIPEtEzG7YKoFcmHAYh4MukpC1TCpZKEKTjOsOWMlbkR3LMPVsPXeusV9ZTPdS/oSDpzIirX6fPNMgyy2N0Xp1sMJ0aAiNcMd1PtmZpPcuogKBeXnjE4r+THOAqQrTW5C75XazKw4LgLRlEVLlcbJpHH9oNdhuD6/bMSpRSMlHNykv7PvJSITGfbgxQX4WShQKP1Tf2lxMZu8pj871n6trFjrr/byGiyF282H5Ji3qRGogjk9lDg82fNFriT6L6ckmojZIYp8SPCgym3SzJD/CoJp/BbZ8/PxSI=
+#  on:
+#    tags: true
+#    repo: git-albertomarin/badX12
+#    branch: master
+#    python: 3.6
+#    skip_cleanup: true
