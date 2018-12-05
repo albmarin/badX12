@@ -26,6 +26,7 @@ A Simple Example
 ----------------
 
 .. code-block:: python
+
     from badx12 import Parser
 
     parser = Parser()
@@ -41,3 +42,4 @@ Links
 
 * License: https://en.wikipedia.org/wiki/MIT_License
 * Documentation: https://badX12.readthedocs.io.
+* X12 EDI Standard: http://www.x12.org/x12-work-products/x12-edi-standards.cfm
