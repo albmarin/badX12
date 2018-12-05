@@ -1,11 +1,12 @@
-Welcome to badX12's documentation!
+badX12: A Python Library for parsing ANSI ASC X12 files.
 ======================================
+.. include:: ../README.rst
+
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :hidden:
+   :glob:
 
-   readme
    installation
    usage
    modules
@@ -13,8 +14,3 @@ Welcome to badX12's documentation!
    authors
    history
 
-Indices and tables
-==================
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
