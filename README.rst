@@ -22,6 +22,15 @@ badX12
 
 A Python Library for parsing ANSI ASC X12 files.
 
+Installing
+----------
+
+Install and update using pip:
+
+.. code-block:: text
+
+    pip install -U badX12
+
 A Simple Example
 ----------------
 
