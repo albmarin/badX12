@@ -9,6 +9,9 @@ badX12
 .. image:: https://img.shields.io/travis/git-albertomarin/badX12.svg
         :target: https://travis-ci.org/git-albertomarin/badX12
 
+.. image:: https://codecov.io/gh/git-albertomarin/badX12/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/git-albertomarin/badX12
+
 .. image:: https://readthedocs.org/projects/badx12/badge/?version=latest
         :target: https://badX12.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
