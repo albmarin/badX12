@@ -4,10 +4,10 @@ badX12
 
 
 .. image:: https://img.shields.io/pypi/v/badx12.svg
-        :target: https://pypi.python.org/pypi/badx12
+        :target: https://pypi.python.org/pypi/badX12
 
 .. image:: https://img.shields.io/travis/git-albertomarin/badx12.svg
-        :target: https://travis-ci.org/git-albertomarin/badx12
+        :target: https://travis-ci.org/git-albertomarin/badX12
 
 .. image:: https://readthedocs.org/projects/badx12/badge/?version=latest
         :target: https://badx12.readthedocs.io/en/latest/?badge=latest
