@@ -55,17 +55,11 @@ class Group(GroupEnvelope):
 
     def to_dict(self):
         return {
-            "group": {
-                "header": self.header,
-                "trailer": self.trailer,
-                "body": self.body,
-                "transaction_sets": self.transaction_sets,
-            }
+            "header": self.header.to_dict(),
+            "trailer": self.trailer.to_dict(),
+            "body": [item.to_dict() for item in self.body],
+            "transaction_sets": [item.to_dict() for item in self.transaction_sets],
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class GroupHeader(Segment):
@@ -73,7 +67,7 @@ class GroupHeader(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 8
+        self.field_count = 8
 
         self.id = Element(
             name="GS",
@@ -167,27 +161,12 @@ class GroupHeader(Segment):
 
     def to_dict(self):
         return {
-            "group_header": {
-                "id": self.id.name,
-                "field_count": self.field_count,
-                "fields": [val.content for val in self.fields],
-                "element_separator": self.element_separator,
-                "segment_terminator": self.segment_terminator,
-                "sub_element_separator": self.sub_element_separator,
-                "GS01": self.gs01.content,
-                "GS02": self.gs02.content,
-                "GS03": self.gs03.content,
-                "GS04": self.gs04.content,
-                "GS05": self.gs05.content,
-                "GS06": self.gs06.content,
-                "GS07": self.gs07.content,
-                "GS08": self.gs08.content,
-            }
+            "field_count": self.field_count,
+            "fields": [field.to_dict() for field in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class GroupTrailer(Segment):
@@ -195,7 +174,7 @@ class GroupTrailer(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 2
+        self.field_count = 2
 
         self.id = Element(
             name="GE",
@@ -226,3 +205,12 @@ class GroupTrailer(Segment):
             content="",
         )
         self.fields.append(self.ge02)
+
+    def to_dict(self):
+        return {
+            "field_count": self.field_count,
+            "fields": [field.to_dict() for field in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
+        }

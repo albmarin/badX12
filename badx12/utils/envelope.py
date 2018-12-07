@@ -50,6 +50,13 @@ class Envelope(object):
     def number_of_segments(self):
         return len(self.body)
 
+    def to_dict(self):
+        return {
+            "header": self.header.to_dict(),
+            "trailer": self.trailer.to_dict(),
+            "body": [item.to_dict() for item in self.body],
+        }
+
 
 class InterchangeEnvelope(Envelope):
     def __init__(self):

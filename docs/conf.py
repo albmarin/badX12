@@ -95,7 +95,7 @@ html_theme_options = {
     "description": "A Python Library for parsing ANSI ASC X12 files.",
     "github_user": "git-albertomarin",
     "github_repo": "badX12",
-    "fixed_sidebar": True
+    "fixed_sidebar": True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

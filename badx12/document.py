@@ -14,6 +14,14 @@ class DocumentConfiguration:
         self.segment_terminator = segment_terminator
         self.sub_element_separator = sub_element_separator
 
+    def to_dict(self):
+        return {
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
+            "version": self.version,
+        }
+
 
 class ValidationReport:
     def __init__(self):
@@ -56,11 +64,11 @@ class EDIDocument:
         return {
             "document": {
                 "text": self.text,
-                "config": self.config,
-                "interchange": self.interchange,
+                "config": self.config.to_dict(),
+                "interchange": self.interchange.to_dict(),
             }
         }
 
     def __repr__(self):
-        _pp = pp.PrettyPrinter()
+        _pp = pp.PrettyPrinter(indent=2)
         return _pp.pformat(self.to_dict())

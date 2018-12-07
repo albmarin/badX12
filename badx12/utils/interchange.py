@@ -35,14 +35,7 @@ class Interchange(InterchangeEnvelope):
             iea02_name = self.trailer.iea02.name
             report.add_error(
                 IDMismatchError(
-                    msg="The "
-                    + isa13_desc
-                    + " in "
-                    + isa13_name
-                    + " does not match "
-                    + iea02_desc
-                    + " in "
-                    + iea02_name,
+                    msg=f"The {isa13_desc}  in {isa13_name} does not match {iea02_desc} in {iea02_name}",
                     segment=self.header.id,
                 )
             )
@@ -55,31 +48,19 @@ class Interchange(InterchangeEnvelope):
         if int(self.trailer.iea01.content) != len(self.groups):
             report.add_error(
                 SegmentCountError(
-                    msg="The "
-                    + self.trailer.iea01.description
-                    + " in "
-                    + self.trailer.iea01.name
-                    + " value of "
-                    + self.trailer.iea01.content
-                    + " does not match the parsed count of "
-                    + str(len(self.groups)),
+                    msg=f"The {self.trailer.iea01.description} in {self.trailer.iea01.name} value of "
+                    f"{self.trailer.iea01.content} does not match the parsed count of {len(self.groups)}",
                     segment=self.trailer.id,
                 )
             )
 
     def to_dict(self):
         return {
-            "interchange": {
-                "header": self.header,
-                "trailer": self.trailer,
-                "body": self.body,
-                "groups": self.groups,
-            }
+            "header": self.header.to_dict(),
+            "trailer": self.trailer.to_dict(),
+            "body": [item.to_dict() for item in self.body],
+            "groups": [group.to_dict() for group in self.groups],
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class InterchangeHeader(Segment):
@@ -87,7 +68,7 @@ class InterchangeHeader(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 16
+        self.field_count = 16
 
         self.id = Element(
             name="ISA",
@@ -261,34 +242,12 @@ class InterchangeHeader(Segment):
 
     def to_dict(self):
         return {
-            "interchange_header": {
-                "field_count": self.field_count,
-                "fields": [val.content for val in self.fields],
-                "element_separator": self.element_separator,
-                "segment_terminator": self.segment_terminator,
-                "sub_element_separator": self.sub_element_separator,
-                "ISA01": self.isa01,
-                "ISA02": self.isa02,
-                "ISA03": self.isa03,
-                "ISA04": self.isa04,
-                "ISA05": self.isa05,
-                "ISA06": self.isa06,
-                "ISA07": self.isa07,
-                "ISA08": self.isa08,
-                "ISA09": self.isa09,
-                "ISA10": self.isa10,
-                "ISA11": self.isa11,
-                "ISA12": self.isa12,
-                "ISA13": self.isa13,
-                "ISA14": self.isa14,
-                "ISA15": self.isa15,
-                "ISA16": self.isa16,
-            }
+            "field_count": self.field_count,
+            "fields": [val.to_dict() for val in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class InterchangeTrailer(Segment):
@@ -296,7 +255,7 @@ class InterchangeTrailer(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 2
+        self.field_count = 2
 
         self.id = Element(
             name="IEA",
@@ -330,17 +289,9 @@ class InterchangeTrailer(Segment):
 
     def to_dict(self):
         return {
-            "interchange_trailer": {
-                "field_count": self.field_count,
-                "fields": [val.content for val in self.fields],
-                "element_separator": self.element_separator,
-                "segment_terminator": self.segment_terminator,
-                "sub_element_separator": self.sub_element_separator,
-                "IEA01": self.iea01,
-                "IEA02": self.iea02,
-            }
+            "field_count": self.field_count,
+            "fields": [val.to_dict() for val in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())

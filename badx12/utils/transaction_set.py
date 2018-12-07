@@ -1,5 +1,3 @@
-import pprint as pp
-
 from badx12.utils import TransactionSetEnvelope, Element, Segment
 from badx12.utils.errors import IDMismatchError, SegmentCountError
 
@@ -33,14 +31,7 @@ class TransactionSet(TransactionSetEnvelope):
             se02_name = self.trailer.se02.name
             report.add_error(
                 IDMismatchError(
-                    msg="The "
-                    + st02_desc
-                    + " in "
-                    + st02_name
-                    + " does not match "
-                    + se02_desc
-                    + " in "
-                    + se02_name,
+                    msg=f"The {st02_desc} in {st02_name} does not match {se02_desc} in {se02_name}",
                     segment=self.header.id,
                 )
             )
@@ -61,16 +52,10 @@ class TransactionSet(TransactionSetEnvelope):
 
     def to_dict(self):
         return {
-            "transaction_set": {
-                "header": self.header,
-                "trailer": self.trailer,
-                "body": self.body,
-            }
+            "header": self.header.to_dict(),
+            "trailer": self.trailer.to_dict(),
+            "body": [item.to_dict() for item in self.body],
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class TransactionSetHeader(Segment):
@@ -78,7 +63,7 @@ class TransactionSetHeader(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 3
+        self.field_count = 3
 
         self.id = Element(
             name="ST",
@@ -122,15 +107,9 @@ class TransactionSetHeader(Segment):
 
     def to_dict(self):
         return {
-            "transaction_set_header": {
-                "field_count": self.field_count,
-                "fields": self.fields,
-            }
+            "field_count": self.field_count,
+            "fields": [field.to_dict() for field in self.fields],
         }
-
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
 
 
 class TransactionSetTrailer(Segment):
@@ -138,7 +117,7 @@ class TransactionSetTrailer(Segment):
 
     def __init__(self):
         Segment.__init__(self)
-        self.fieldCount = 2
+        self.field_count = 2
 
         self.id = Element(
             name="SE",
@@ -169,3 +148,9 @@ class TransactionSetTrailer(Segment):
             content="",
         )
         self.fields.append(self.se02)
+
+    def to_dict(self):
+        return {
+            "field_count": self.field_count,
+            "fields": [field.to_dict() for field in self.fields],
+        }

@@ -29,15 +29,6 @@ class Element(object):
             self._is_field_too_short(content_length, report)
             self._is_field_too_long(content_length, report)
 
-    def __str__(self):
-        if self.required:
-            return str(self.content)
-
-        if self.content != "":
-            return str(self.content)
-
-        return ""
-
     def _is_field_too_short(self, content_length, report):
         """
         Determine if the field content is too short.
@@ -70,16 +61,19 @@ class Element(object):
 
     def to_dict(self):
         return {
-            "element": {
-                "name": self.name,
-                "description": self.description,
-                "required": self.required,
-                "min_length": self.min_length,
-                "max_length": self.max_length,
-                "content": self.content,
-            }
+            "name": self.name,
+            "description": self.description,
+            "required": self.required,
+            "min_length": self.min_length,
+            "max_length": self.max_length,
+            "content": self.content,
         }
 
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
+    def __str__(self):
+        if self.required:
+            return str(self.content)
+
+        if self.content != "":
+            return str(self.content)
+
+        return ""

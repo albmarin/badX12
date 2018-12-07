@@ -28,14 +28,6 @@ class Segment(object):
         self.sub_element_separator = document_configuration.sub_element_separator
         return str(self)
 
-    def __str__(self):
-        """Return the segment as a string"""
-        out = ""
-        if self._all_fields_empty():
-            return out
-        out = self._get_fields_as_string(out)
-        return out
-
     def _all_fields_empty(self):
         """determine if all fields are empty"""
         for field in self.fields:
@@ -74,15 +66,17 @@ class Segment(object):
 
     def to_dict(self):
         return {
-            "segment": {
-                "field_count": self.field_count,
-                "fields": self.fields,
-                "element_separator": self.element_separator,
-                "segment_terminator": self.segment_terminator,
-                "sub_element_separator": self.sub_element_separator,
-            }
+            "field_count": self.field_count,
+            "fields": [field.to_dict() for field in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
         }
 
-    def __repr__(self):
-        _pp = pp.PrettyPrinter()
-        return _pp.pformat(self.to_dict())
+    def __str__(self):
+        """Return the segment as a string"""
+        out = ""
+        if self._all_fields_empty():
+            return out
+        out = self._get_fields_as_string(out)
+        return out
