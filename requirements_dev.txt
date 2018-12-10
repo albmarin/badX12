@@ -9,6 +9,6 @@ twine==1.12.1
 codecov==2.0.15
 click==7.0
 
-pytest==3.8.2
+pytest==4.0.1
 pytest-runner==4.2
 pytest-cov==2.6.0
