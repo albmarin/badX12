@@ -12,4 +12,4 @@ pre-commit==1.14.2
 
 pytest==4.1.1
 pytest-runner==4.2
-pytest-cov==2.6.0
+pytest-cov==2.6.1
