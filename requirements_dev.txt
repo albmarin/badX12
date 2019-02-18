@@ -11,5 +11,5 @@ click==7.0
 pre-commit==1.14.3
 
 pytest==4.2.1
-pytest-runner==4.2
+pytest-runner==4.4
 pytest-cov==2.6.1
