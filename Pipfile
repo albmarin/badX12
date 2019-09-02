@@ -15,7 +15,7 @@ twine = "==1.13.0"
 codecov = "==2.0.15"
 click = "==7.0"
 pre-commit = "==1.18.3"
-pytest = "==5.1.1"
+pytest = "==5.1.2"
 pytest-runner = "==5.1"
 pytest-cov = "==2.7.1"
 
