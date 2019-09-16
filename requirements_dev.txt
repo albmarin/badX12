@@ -8,7 +8,7 @@ Sphinx==2.2.0
 twine==1.14.0
 codecov==2.0.15
 click==7.0
-pre-commit==1.16.1
+pre-commit==1.18.3
 
 pytest==4.6.1
 pytest-runner==5.1
