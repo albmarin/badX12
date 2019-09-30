@@ -10,6 +10,6 @@ codecov==2.0.15
 click==7.0
 pre-commit==1.18.3
 
-pytest==4.6.1
+pytest==5.2.0
 pytest-runner==5.1
 pytest-cov==2.7.1
