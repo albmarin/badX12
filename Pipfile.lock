@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ca820bff3c495225c30fc68c1e52d6d4aa677da7d20e381e2bae5b8821306049"
+            "sha256": "14859fd42256f608ec8d9e4efc61b7f21bb47c0af3bb8d38ae1f6bd80712a9aa"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -59,11 +59,11 @@
         },
         "bump2version": {
             "hashes": [
-                "sha256:524bde030318fe2543038defe0f77739605636fef96924883813cb290cf79c1e",
-                "sha256:bfcc051498dda9fd9ac8634689f4516e1c20fdeeace3278932cc6e1248418b36"
+                "sha256:477f0e18a0d58e50bb3dbc9af7fcda464fd0ebfc7a6151d8888602d7153171a0",
+                "sha256:cd4f3a231305e405ed8944d8ff35bd742d9bc740ad62f483bd0ca21ce7131984"
             ],
             "index": "pypi",
-            "version": "==0.5.11"
+            "version": "==1.0.0"
         },
         "certifi": {
             "hashes": [
@@ -234,10 +234,10 @@
         },
         "identify": {
             "hashes": [
-                "sha256:6f44e637caa40d1b4cb37f6ed3b262ede74901d28b1cc5b1fc07360871edd65d",
-                "sha256:72e9c4ed3bc713c7045b762b0d2e2115c572b85abfc1f4604f5a4fd4c6642b71"
+                "sha256:418f3b2313ac0b531139311a6b426854e9cbdfcfb6175447a5039aa6291d8b30",
+                "sha256:8ad99ed1f3a965612dcb881435bf58abcfbeb05e230bb8c352b51e8eac103360"
             ],
-            "version": "==1.4.9"
+            "version": "==1.4.10"
         },
         "idna": {
             "hashes": [
@@ -482,10 +482,10 @@
         },
         "six": {
             "hashes": [
-                "sha256:1f1b7d42e254082a9db6279deae68afb421ceba6158efa6131de7b3003ee93fd",
-                "sha256:30f610279e8b2578cab6db20741130331735c781b56053c59c4076da27f06b66"
+                "sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
+                "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"
             ],
-            "version": "==1.13.0"
+            "version": "==1.14.0"
         },
         "snowballstemmer": {
             "hashes": [
