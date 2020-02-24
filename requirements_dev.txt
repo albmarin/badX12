@@ -5,7 +5,7 @@ flake8==3.7.9
 tox==3.14.5
 coverage==5.0.3
 Sphinx==2.4.3
-twine==1.13.0
+twine==3.1.1
 codecov==2.0.15
 click==7.0
 pre-commit==1.16.1
