@@ -1,7 +1,7 @@
 language: python
 python:
 - 3.6
-install: pip install -U tox-travis
+install: pip install -U tox>=3.12.1
 script: tox
 deploy:
   provider: pypi
