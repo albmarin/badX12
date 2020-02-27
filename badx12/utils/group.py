@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import pprint as pp
 
-from badx12.utils import GroupEnvelope, Element, Segment
-from badx12.utils.errors import SegmentCountError, IDMismatchError
+from badx12.utils import Element, GroupEnvelope, Segment
+from badx12.utils.errors import IDMismatchError, SegmentCountError
 
 
 class Group(GroupEnvelope):

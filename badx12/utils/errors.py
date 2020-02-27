@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class FieldValidationError(Exception):
     """Exception raised for errors in the input.
     Attributes:

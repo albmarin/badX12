@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 from pathlib import Path
 
 from badx12.document import EDIDocument
-from badx12.utils import InterchangeHeader, Element, Segment
+from badx12.utils import Element, InterchangeHeader, Segment
 from badx12.utils.errors import InvalidFileTypeError, SegmentTerminatorNotFoundError
 from badx12.utils.group import Group, GroupHeader, GroupTrailer
 from badx12.utils.transaction_set import (

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """Top-level package for badX12."""
+from .__main__ import cli
 from .document import EDIDocument
 from .parser import Parser
-from .__main__ import cli
 
 __author__ = """Alberto J. Marin"""
 __email__ = "alberto@ajmar.in"

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 from pathlib import Path
 
@@ -6,6 +7,7 @@ import click
 import badx12.utils.errors as err
 from badx12.common.paths import OUTPUT_DIR
 from badx12.parser import Parser
+
 from .utils import export_file
 
 logger = logging.getLogger(__name__)

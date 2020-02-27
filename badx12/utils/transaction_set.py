@@ -1,4 +1,5 @@
-from badx12.utils import TransactionSetEnvelope, Element, Segment
+# -*- coding: utf-8 -*-
+from badx12.utils import Element, Segment, TransactionSetEnvelope
 from badx12.utils.errors import IDMismatchError, SegmentCountError
 
 
