@@ -13,4 +13,3 @@ badX12: A Python Library for parsing ANSI ASC X12 files.
    contributing
    authors
    history
-

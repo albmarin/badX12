@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pprint as pp
 
 from .element import Element

@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import pprint as pp
 
 from badx12._settings import DocumentSettings
+
 from .element import Element
 
 
