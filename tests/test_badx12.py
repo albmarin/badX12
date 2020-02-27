@@ -9,8 +9,7 @@ import shutil
 import pytest
 from click.testing import CliRunner
 
-from badx12 import Parser
-from badx12 import cli
+from badx12 import Parser, cli
 from badx12.common.click import add_commands
 from badx12.utils import errors as err
 from tests.utils import TEST_FILE_DIR, TEST_TEMP_FILE_DIR
@@ -73,13 +72,13 @@ def test_cli(test_files, cli_runner):
 
 
 def test_click_common():
-    with pytest.raises(TypeError, message="Expected TypeError"):
+    with pytest.raises(TypeError):
         add_commands("cli", "commands")
 
-    with pytest.raises(TypeError, message="Expected TypeError"):
+    with pytest.raises(TypeError):
         add_commands(cli, None)
 
-    with pytest.raises(TypeError, message="Expected TypeError"):
+    with pytest.raises(TypeError):
         add_commands(cli, ("command", "command"))
 
 
@@ -100,17 +99,12 @@ def test_edi(test_files):
 
 
 def test_bad_file(test_files):
-    with pytest.raises(
-        err.InvalidFileTypeError, message="Expecting InvalidFileTypeError"
-    ):
+    with pytest.raises(err.InvalidFileTypeError):
         Parser((test_files["errors"] / "bad_file.edi"))
 
 
 def test_segment_terminator(test_files):
-    with pytest.raises(
-        err.SegmentTerminatorNotFoundError,
-        message="Expected SegmentTerminatorNotFoundError",
-    ):
+    with pytest.raises(err.SegmentTerminatorNotFoundError):
         Parser((test_files["errors"] / "segment_terminator.edi"))
 
 
@@ -123,7 +117,7 @@ def test_error_validation(test_files):
 
 
 def test_bad_file_input():
-    with pytest.raises(TypeError, message="Expected TypeError"):
+    with pytest.raises(TypeError):
         Parser(TEST_FILE_DIR)
 
 

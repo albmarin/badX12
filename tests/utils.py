@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pathlib import Path
 
 TESTS_LOCATION = Path(__file__).parents[0]
