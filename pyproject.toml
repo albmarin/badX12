@@ -22,8 +22,11 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
 ]
-requires = []
-description-file = "README.md"
+requires = [
+    "click==7.0",
+    "dicttoxml==1.7.4",
+]
+description-file = "README.rst"
 requires-python = ">=3.6"
 
 [tool.flit.metadata.urls]
@@ -35,6 +38,8 @@ test = [
     "pytest-runner==5.1",
     "pytest-cov==2.7.1",
     "codecov==2.0.15",
+    "flake8==3.7.7",
+    "tox==3.12.1",
     "mypy",
     "black",
 ]
@@ -52,10 +57,7 @@ dev = [
     "wheel==0.33.4",
     "pre-commit==1.16.1",
 ]
-all = [
-    "click==7.0",
-    "dicttoxml==1.7.4",
-]
+all = []
 
 [tool.black]
 line-length = 88
