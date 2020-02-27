@@ -26,7 +26,7 @@ requires = [
     "click==7.0",
     "dicttoxml==1.7.4",
 ]
-description-file = "README.rst"
+description-file = "README.md"
 requires-python = ">=3.6"
 
 [tool.flit.metadata.urls]
@@ -39,7 +39,6 @@ test = [
     "pytest-cov==2.7.1",
     "codecov==2.0.15",
     "flake8==3.7.7",
-    "tox==3.12.1",
     "mypy",
     "black",
 ]
@@ -49,10 +48,10 @@ doc = [
     "markdown-include",
 ]
 dev = [
-    "tox==3.12.1",
     "pycalver",
     "flake8==3.7.7",
     "black",
+    "isort",
     "twine==1.13.0",
     "wheel==0.33.4",
     "pre-commit==1.16.1",
