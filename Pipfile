@@ -7,7 +7,7 @@ verify_ssl = true
 bump2version = "==1.0.0"
 wheel = "==0.34.2"
 watchdog = "==0.10.2"
-flake8 = "==3.7.9"
+flake8 = "==3.8.1"
 tox = "==3.14.5"
 coverage = "==5.0.3"
 sphinx = "==2.4.3"
