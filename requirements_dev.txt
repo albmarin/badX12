@@ -4,7 +4,7 @@ watchdog==0.10.3
 flake8==3.8.3
 tox==3.16.0
 coverage==5.1
-Sphinx==2.1.0
+Sphinx==3.1.1
 twine==1.13.0
 codecov==2.0.15
 click==7.0
