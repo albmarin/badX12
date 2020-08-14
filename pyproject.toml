@@ -3,7 +3,7 @@ requires = ["flit"]
 build-backend = "flit.buildapi"
 
 [tool.flit.metadata]
-module = "badX12"
+module = "badx12"
 author = "Alberto J. Marin"
 author-email = "alberto@ajmar.in"
 home-page = "https://github.com/albmarin/badX12"
@@ -34,11 +34,11 @@ Documentation = "https://badx12.readthedocs.io/en/latest/"
 
 [tool.flit.metadata.requires-extra]
 test = [
-    "pytest==4.6.1",
-    "pytest-runner==5.1",
-    "pytest-cov==2.7.1",
-    "codecov==2.0.15",
-    "flake8==3.7.7",
+    "pytest==6.0.1",
+    "pytest-runner==5.2",
+    "pytest-cov==2.10.0",
+    "codecov==2.1.8",
+    "flake8==3.8.3",
     "mypy",
     "black",
 ]
@@ -49,12 +49,13 @@ doc = [
 ]
 dev = [
     "pycalver",
-    "flake8==3.7.7",
+    "flake8==3.8.3",
     "black",
     "isort",
-    "twine==1.13.0",
-    "wheel==0.33.4",
-    "pre-commit==1.16.1",
+    "twine==3.2.0",
+    "wheel==0.35.0",
+    "packaging>=20.2",
+    "pre-commit==2.6.0",
 ]
 all = []
 
