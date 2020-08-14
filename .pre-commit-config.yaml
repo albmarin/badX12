@@ -1,29 +1,34 @@
 repos:
--   repo: https://github.com/ambv/black
-    rev: 19.3b0
-    hooks:
-    - id: black
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.2.3
-    hooks:
-    - id: flake8
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.2.3
-    hooks:
-    -   id: trailing-whitespace
-    -   id: check-docstring-first
-    -   id: check-json
-    -   id: check-xml
-    -   id: check-yaml
-    -   id: check-merge-conflict
-    -   id: check-symlinks
-    -   id: check-vcs-permalinks
-    -   id: debug-statements
-    -   id: detect-private-key
-    -   id: end-of-file-fixer
-    -   id: fix-encoding-pragma
-    -   id: mixed-line-ending
-        args: [--fix=lf]
-    -   id: pretty-format-json
-        args: [--autofix, --indent=2]
-    -   id: requirements-txt-fixer
+    - repo: https://github.com/ambv/black
+      rev: 19.10b0
+      hooks:
+        - id: black
+    - repo: https://github.com/timothycrosley/isort
+      rev: 5.4.1
+      hooks:
+        - id: isort
+          args: [--multi-line=3, --trailing-comma, --force-grid-wrap=0, --combine-as, --line-width=88]
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v2.2.3
+      hooks:
+        - id: flake8
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v2.2.3
+      hooks:
+        - id: trailing-whitespace
+        - id: check-docstring-first
+        - id: check-json
+        - id: check-xml
+        - id: check-yaml
+        - id: check-merge-conflict
+        - id: check-symlinks
+        - id: check-vcs-permalinks
+        - id: debug-statements
+        - id: detect-private-key
+        - id: end-of-file-fixer
+        - id: fix-encoding-pragma
+        - id: mixed-line-ending
+          args: [--fix=lf]
+        - id: pretty-format-json
+          args: [--autofix, --indent=2]
+        - id: requirements-txt-fixer
