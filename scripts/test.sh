@@ -3,4 +3,5 @@
 set -e
 set -x
 
-pytest --cov=badX12 --cov=tests --cov-report=term-missing ${@}
+bash ./scripts/lint.sh
+pytest --cov=badx12 --cov=tests --cov-report=term-missing --cov-report=xml tests ${@}
