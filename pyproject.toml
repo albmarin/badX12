@@ -39,6 +39,7 @@ test = [
     "pytest-cov==2.10.0",
     "codecov==2.1.8",
     "flake8==3.8.3",
+    "isort==5.4.1",
     "mypy",
     "black",
 ]
@@ -49,9 +50,7 @@ doc = [
 ]
 dev = [
     "pycalver",
-    "flake8==3.8.3",
     "black",
-    "isort",
     "twine==3.2.0",
     "wheel==0.35.0",
     "packaging>=20.2",
