@@ -3,7 +3,7 @@ import json
 import logging
 import time
 
-from dicttoxml import dicttoxml
+from dicttoxml import dicttoxml  # type: ignore
 
 logging.getLogger("dicttoxml").setLevel(logging.WARNING)
 
