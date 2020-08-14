@@ -79,9 +79,9 @@ class Parser:
                 header.fields[index].content = isa
             if index == 16:
                 last_header_field = header_field_list[16]
-                header.isa16.content = last_header_field[
-                    0:1
-                ]  # the sub-element separator is always the first character in this element.
+
+                # The sub-element separator is always the first character in this element.
+                header.isa16.content = last_header_field[0:1]
 
                 if last_header_field[1:2]:
                     self.document.config.segment_terminator = last_header_field[1:2]
