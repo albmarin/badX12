@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
 from pathlib import Path
+from typing import List, Union
 
 import click
 
-import badx12.utils.errors as err
 from badx12.common.paths import OUTPUT_DIR
+from badx12.document import EDIDocument, ValidationReport, errors as err
 from badx12.parser import Parser
 
 from .utils import export_file
@@ -29,17 +30,21 @@ logger = logging.getLogger(__name__)
     type=click.Path(exists=True, file_okay=False, dir_okay=True),
     help="Specify an output directory.",
 )
-def parse(path, export_type, output_dir):
+def parse(
+    path: Union[Path, str], export_type: str, output_dir: Union[Path, str]
+) -> None:
     path = Path(path)
     output_dir = Path(output_dir) if output_dir else OUTPUT_DIR
-    files = [f for f in path.glob("*") if f.is_file()] if path.is_dir() else [path]
+    files: List[str] = [
+        str(f) for f in path.glob("*") if f.is_file()
+    ] if path.is_dir() else [str(path)]
 
     for f in files:
         logger.debug(f"Parsing {f}, export as {export_type} to {output_dir}")
         try:
-            parser = Parser(f)
-            document = parser.document
-            report = document.validate()
+            parser: Parser = Parser(f)
+            document: EDIDocument = parser.document
+            report: ValidationReport = document.validate()
 
             if not report.is_document_valid():
                 logger.error(
@@ -47,7 +52,7 @@ def parse(path, export_type, output_dir):
                 )
                 continue
 
-            doc_dict = document.to_dict()
+            doc_dict: dict = document.to_dict()
             export_file(doc_dict, export_type, output_dir)
 
         except (

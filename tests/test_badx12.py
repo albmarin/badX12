@@ -11,7 +11,7 @@ from click.testing import CliRunner
 
 from badx12 import Parser, cli
 from badx12.common.click import add_commands
-from badx12.utils import errors as err
+from badx12.document import errors as err
 from tests.utils import TEST_FILE_DIR, TEST_TEMP_FILE_DIR
 
 

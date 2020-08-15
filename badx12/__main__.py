@@ -18,7 +18,7 @@ from .common.click import add_commands
     help="Set the logging level",
     type=click.Choice(["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]),
 )
-def cli(log):
+def cli(log: str) -> None:
     logging.basicConfig(
         stream=sys.stdout,
         format="%(asctime)s|%(levelname)s|%(filename)s:%(lineno)s|%(message)s",

@@ -7,5 +7,8 @@ from .envelope import (
     TransactionSetEnvelope,
 )
 from .errors import FieldValidationError, IDMismatchError, SegmentCountError
+from .factory import EDIDocument
 from .interchange import Interchange, InterchangeHeader, InterchangeTrailer
 from .segment import Segment
+from .settings import DocumentConfiguration, DocumentSettings
+from .validators import ValidationReport

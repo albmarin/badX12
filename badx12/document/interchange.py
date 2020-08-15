@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
-import pprint as pp
-
 from .element import Element
 from .envelope import InterchangeEnvelope
 from .errors import IDMismatchError, SegmentCountError
 from .segment import Segment
+from .validators import ValidationReport
 
 
 class Interchange(InterchangeEnvelope):
     """An EDI X12 interchange"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         InterchangeEnvelope.__init__(self)
-        self.header = InterchangeHeader()
-        self.trailer = InterchangeTrailer()
+        self.header: InterchangeHeader = InterchangeHeader()
+        self.trailer: InterchangeTrailer = InterchangeTrailer()
 
-    def validate(self, report):
+    def validate(self, report: ValidationReport) -> None:
         """
         Validate the envelope
         :param report: the validation report to append errors.
@@ -24,16 +23,16 @@ class Interchange(InterchangeEnvelope):
         self._validate_control_ids(report)
         self._validate_group_count(report)
 
-    def _validate_control_ids(self, report):
+    def _validate_control_ids(self, report: ValidationReport) -> None:
         """
         Validate the control id match in the header and trailer
         :param report: the validation report to append errors.
         """
         if self.header.isa13.content != self.trailer.iea02.content:
-            isa13_desc = self.header.isa13.description
-            isa13_name = self.header.isa13.name
-            iea02_desc = self.trailer.iea02.description
-            iea02_name = self.trailer.iea02.name
+            isa13_desc: str = self.header.isa13.description
+            isa13_name: str = self.header.isa13.name
+            iea02_desc: str = self.trailer.iea02.description
+            iea02_name: str = self.trailer.iea02.name
             report.add_error(
                 IDMismatchError(
                     msg=f"The {isa13_desc}  in {isa13_name} does not match {iea02_desc} in {iea02_name}",
@@ -41,7 +40,7 @@ class Interchange(InterchangeEnvelope):
                 )
             )
 
-    def _validate_group_count(self, report):
+    def _validate_group_count(self, report: ValidationReport) -> None:
         """
         Validate the actual group count matches the specified count.
         :param report: the validation report to append errors.
@@ -49,13 +48,13 @@ class Interchange(InterchangeEnvelope):
         if int(self.trailer.iea01.content) != len(self.groups):
             report.add_error(
                 SegmentCountError(
-                    msg=f"The {self.trailer.iea01.description} in {self.trailer.iea01.name} value of "
-                    f"{self.trailer.iea01.content} does not match the parsed count of {len(self.groups)}",
+                    msg=f"""The {self.trailer.iea01.description} in {self.trailer.iea01.name} value of
+                    {self.trailer.iea01.content} does not match the parsed count of {len(self.groups)}""",
                     segment=self.trailer.id,
                 )
             )
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "header": self.header.to_dict(),
             "trailer": self.trailer.to_dict(),
@@ -67,11 +66,11 @@ class Interchange(InterchangeEnvelope):
 class InterchangeHeader(Segment):
     """An EDI X12 interchange header"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         Segment.__init__(self)
-        self.field_count = 16
+        self.field_count: int = 16
 
-        self.id = Element(
+        self.id: Element = Element(
             name="ISA",
             description="Interchange Control Header Code",
             required=True,
@@ -81,7 +80,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.id)
 
-        self.isa01 = Element(
+        self.isa01: Element = Element(
             name="ISA01",
             description="Authorization Information Qualifier",
             required=True,
@@ -91,7 +90,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa01)
 
-        self.isa02 = Element(
+        self.isa02: Element = Element(
             name="ISA02",
             description="Authorization Information",
             required=True,
@@ -101,7 +100,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa02)
 
-        self.isa03 = Element(
+        self.isa03: Element = Element(
             name="ISA03",
             description="Security Information Qualifier",
             required=True,
@@ -111,7 +110,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa03)
 
-        self.isa04 = Element(
+        self.isa04: Element = Element(
             name="ISA04",
             description="Security Information",
             required=True,
@@ -121,7 +120,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa04)
 
-        self.isa05 = Element(
+        self.isa05: Element = Element(
             name="ISA05",
             description="Interchange ID Qualifier",
             required=True,
@@ -131,7 +130,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa05)
 
-        self.isa06 = Element(
+        self.isa06: Element = Element(
             name="ISA06",
             description="Interchange Sender ID",
             required=True,
@@ -141,7 +140,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa06)
 
-        self.isa07 = Element(
+        self.isa07: Element = Element(
             name="ISA07",
             description="Interchange ID Qualifier",
             required=True,
@@ -151,7 +150,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa07)
 
-        self.isa08 = Element(
+        self.isa08: Element = Element(
             name="ISA08",
             description="Interchange Receiver ID",
             required=True,
@@ -161,7 +160,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa08)
 
-        self.isa09 = Element(
+        self.isa09: Element = Element(
             name="ISA09",
             description="Interchange Date",
             required=True,
@@ -171,7 +170,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa09)
 
-        self.isa10 = Element(
+        self.isa10: Element = Element(
             name="ISA10",
             description="Interchange Time",
             required=True,
@@ -181,7 +180,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa10)
 
-        self.isa11 = Element(
+        self.isa11: Element = Element(
             name="ISA11",
             description="Interchange Control Standard ID",
             required=True,
@@ -191,7 +190,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa11)
 
-        self.isa12 = Element(
+        self.isa12: Element = Element(
             name="ISA12",
             description="Interchange Control Version Number",
             required=True,
@@ -201,7 +200,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa12)
 
-        self.isa13 = Element(
+        self.isa13: Element = Element(
             name="ISA13",
             description="Interchange Control Number",
             required=True,
@@ -211,7 +210,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa13)
 
-        self.isa14 = Element(
+        self.isa14: Element = Element(
             name="ISA14",
             description="Acknowledgement Requested Flag",
             required=True,
@@ -221,7 +220,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa14)
 
-        self.isa15 = Element(
+        self.isa15: Element = Element(
             name="ISA15",
             description="Test Indicator",
             required=True,
@@ -231,7 +230,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa15)
 
-        self.isa16 = Element(
+        self.isa16: Element = Element(
             name="ISA16",
             description="Sub-element Separator",
             required=True,
@@ -241,7 +240,7 @@ class InterchangeHeader(Segment):
         )
         self.fields.append(self.isa16)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
             "fields": [val.to_dict() for val in self.fields],
@@ -254,11 +253,11 @@ class InterchangeHeader(Segment):
 class InterchangeTrailer(Segment):
     """An EDI X12 interchange Trailer"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         Segment.__init__(self)
-        self.field_count = 2
+        self.field_count: int = 2
 
-        self.id = Element(
+        self.id: Element = Element(
             name="IEA",
             description="Interchange Control Trailer Code",
             required=True,
@@ -268,7 +267,7 @@ class InterchangeTrailer(Segment):
         )
         self.fields.append(self.id)
 
-        self.iea01 = Element(
+        self.iea01: Element = Element(
             name="IEA01",
             description="Number of Included Groups",
             required=True,
@@ -278,7 +277,7 @@ class InterchangeTrailer(Segment):
         )
         self.fields.append(self.iea01)
 
-        self.iea02 = Element(
+        self.iea02: Element = Element(
             name="IEA02",
             description="Interchange Control Number",
             required=True,
@@ -288,7 +287,7 @@ class InterchangeTrailer(Segment):
         )
         self.fields.append(self.iea02)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
             "fields": [val.to_dict() for val in self.fields],

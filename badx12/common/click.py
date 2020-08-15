@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from collections import Iterable
+from typing import Iterable as IterableType
 
 import click
 
 
-def add_commands(click_group, commands):
+def add_commands(click_group: click.core.Group, commands: IterableType) -> None:
     if not isinstance(click_group, click.core.Group):
         raise TypeError(
             f"add_commands() expects click.core.Group for click_group, got {type(click_group)}"
