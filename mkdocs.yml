@@ -1,0 +1,28 @@
+site_name: badX12
+site_description: A Python Library for parsing ANSI ASC X12 files.
+
+theme:
+    name: 'material'
+    palette:
+      primary: 'teal'
+      accent: 'amber'
+
+repo_name: albmarin/badX12
+repo_url: https://github.com/albmarin/badX12
+edit_uri: ''
+
+nav:
+    - Home: 'index.md'
+    - Installation: 'installation.md'
+    - Tutorial - User Guide:
+        - Tutorial - User Guide - Intro: 'tutorial/intro.md'
+    - Development - Contributing: 'contributing.md'
+
+markdown_extensions:
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown_include.include:
+      base_path: docs
+  - admonition
+  - codehilite
+  - extra
