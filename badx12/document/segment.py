@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import pprint as pp
 from typing import List
+
+from badx12.common.helpers import lookahead
 
 from .element import Element
 from .settings import DocumentConfiguration, DocumentSettings
@@ -82,4 +83,14 @@ class Segment(object):
         if self._all_fields_empty():
             return out
         out = self._get_fields_as_string(out)
+        return out
+
+    def __repr__(self) -> str:
+        out = f"{self.__class__.__name__}("
+        for field, has_more in lookahead(self.fields):
+            out += f"{field.name}={field.__repr__()}"
+            if has_more:
+                out += ", "
+
+        out += ")"
         return out
