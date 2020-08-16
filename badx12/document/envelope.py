@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from badx12.common.helpers import lookahead
+
 from .segment import Segment
 from .settings import DocumentConfiguration
 from .validators import ValidationReport
@@ -59,6 +61,26 @@ class Envelope(object):
             "trailer": self.trailer.to_dict(),
             "body": [item.to_dict() for item in self.body],
         }
+
+    def __repr__(self) -> str:
+        out = f"{self.__class__.__name__}("
+        out += f"header={repr(self.header)}, "
+
+        out += "body=("
+        for item, has_more in lookahead(self.body):
+            if not issubclass(item.__class__, Envelope):
+                out += f"{item.id}={repr(item)}"
+
+            else:
+                out += f"{item.__class__.__name__}={repr(item)}"
+
+            if has_more:
+                out += ", "
+
+        out += "), "
+        out += f"trailer={repr(self.trailer)})"
+
+        return out
 
 
 class InterchangeEnvelope(Envelope):
