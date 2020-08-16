@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from badx12.common.helpers import lookahead
+from badx12.document.settings import DocumentConfiguration
+from badx12.document.validators import ValidationReport
 
 from .segment import Segment
-from .settings import DocumentConfiguration
-from .validators import ValidationReport
 
 
 class Envelope(object):

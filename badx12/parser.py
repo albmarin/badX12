@@ -2,20 +2,15 @@
 from pathlib import Path
 from typing import List, Optional
 
-from badx12.document import (
-    EDIDocument,
-    Element,
-    InterchangeHeader,
-    InterchangeTrailer,
-    Segment,
-)
-from badx12.document.errors import InvalidFileTypeError, SegmentTerminatorNotFoundError
+from badx12.document import EDIDocument, InterchangeHeader, InterchangeTrailer
+from badx12.document.datastructures import Element, Segment
 from badx12.document.group import Group, GroupHeader, GroupTrailer
 from badx12.document.transaction_set import (
     TransactionSet,
     TransactionSetHeader,
     TransactionSetTrailer,
 )
+from badx12.exceptions import InvalidFileTypeError, SegmentTerminatorNotFoundError
 
 
 class Parser:

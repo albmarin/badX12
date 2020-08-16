@@ -2,8 +2,8 @@
 
 from typing import Union
 
-from .errors import FieldValidationError
-from .validators import ValidationReport
+from badx12.document.validators import ValidationReport
+from badx12.exceptions import FieldValidationError
 
 
 class Element(object):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from badx12.document import Element, GroupEnvelope, Segment
-from badx12.document.errors import IDMismatchError, SegmentCountError
+from badx12.exceptions import IDMismatchError, SegmentCountError
 
+from .datastructures import Element, GroupEnvelope, Segment
 from .validators import ValidationReport
 
 

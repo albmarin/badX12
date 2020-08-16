@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from badx12.document import Element, Segment, TransactionSetEnvelope
-from badx12.document.errors import IDMismatchError, SegmentCountError
+from badx12.exceptions import IDMismatchError, SegmentCountError
 
+from .datastructures import Element, Segment, TransactionSetEnvelope
 from .validators import ValidationReport
 
 

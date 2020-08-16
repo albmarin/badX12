@@ -5,8 +5,9 @@ from typing import List, Union
 
 import click
 
+from badx12 import exceptions as err
 from badx12.common.paths import OUTPUT_DIR
-from badx12.document import EDIDocument, ValidationReport, errors as err
+from badx12.document import EDIDocument, ValidationReport
 from badx12.parser import Parser
 
 from .utils import export_file

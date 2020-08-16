@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from .element import Element
-from .envelope import InterchangeEnvelope
-from .errors import IDMismatchError, SegmentCountError
-from .segment import Segment
+from badx12.exceptions import IDMismatchError, SegmentCountError
+
+from .datastructures import Element, InterchangeEnvelope, Segment
 from .validators import ValidationReport
 
 

@@ -2,10 +2,10 @@
 from typing import List
 
 from badx12.common.helpers import lookahead
+from badx12.document.settings import DocumentConfiguration, DocumentSettings
+from badx12.document.validators import ValidationReport
 
 from .element import Element
-from .settings import DocumentConfiguration, DocumentSettings
-from .validators import ValidationReport
 
 
 class Segment(object):
