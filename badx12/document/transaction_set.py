@@ -76,19 +76,17 @@ class TransactionSetHeader(Segment):
             max_length=2,
             content="ST",
         )
-        self.fields.append(self.id)
 
-        self.st01: Element = Element(
+        self.identifier_code: Element = Element(
             name="ST01",
-            description="Transaction Set ID Code",
+            description="Transaction Set Identifier Code",
             required=True,
             min_length=3,
             max_length=3,
             content="",
         )
-        self.fields.append(self.st01)
 
-        self.st02: Element = Element(
+        self.control_number: Element = Element(
             name="ST02",
             description="Transaction Set Control Number",
             required=True,
@@ -96,9 +94,8 @@ class TransactionSetHeader(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.st02)
 
-        self.st03: Element = Element(
+        self.implementation_reference: Element = Element(
             name="ST03",
             description="Implementation Convention Reference",
             required=False,
@@ -106,12 +103,20 @@ class TransactionSetHeader(Segment):
             max_length=35,
             content="",
         )
-        self.fields.append(self.st03)
+
+        self.st01: Element = self.identifier_code
+        self.st02: Element = self.control_number
+        self.st03: Element = self.implementation_reference
+
+        self.fields.extend((self.id, self.st01, self.st02, self.st03))
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [field.to_dict() for field in self.fields],
+            "id": self.id.to_dict(),
+            "identifier_code": self.identifier_code.to_dict(),
+            "control_number": self.control_number.to_dict(),
+            "implementation_reference": self.implementation_reference.to_dict(),
         }
 
 
@@ -130,9 +135,8 @@ class TransactionSetTrailer(Segment):
             max_length=2,
             content="SE",
         )
-        self.fields.append(self.id)
 
-        self.se01: Element = Element(
+        self.segment_count: Element = Element(
             name="SE01",
             description="Number of Included Segments",
             required=True,
@@ -140,9 +144,8 @@ class TransactionSetTrailer(Segment):
             max_length=6,
             content="",
         )
-        self.fields.append(self.se01)
 
-        self.se02: Element = Element(
+        self.control_number: Element = Element(
             name="SE02",
             description="Transaction Set Control Number",
             required=True,
@@ -150,10 +153,16 @@ class TransactionSetTrailer(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.se02)
+
+        self.se01: Element = self.segment_count
+        self.se02: Element = self.control_number
+
+        self.fields.extend((self.id, self.se01, self.se02))
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [field.to_dict() for field in self.fields],
+            "id": self.id.to_dict(),
+            "segment_count": self.segment_count.to_dict(),
+            "control_number": self.control_number.to_dict(),
         }

@@ -58,7 +58,6 @@ class Interchange(InterchangeEnvelope):
         return {
             "header": self.header.to_dict(),
             "trailer": self.trailer.to_dict(),
-            "body": [item.to_dict() for item in self.body],
             "groups": [group.to_dict() for group in self.groups],
         }
 
@@ -78,9 +77,8 @@ class InterchangeHeader(Segment):
             max_length=3,
             content="ISA",
         )
-        self.fields.append(self.id)
 
-        self.isa01: Element = Element(
+        self.authorization_info_qualifier: Element = Element(
             name="ISA01",
             description="Authorization Information Qualifier",
             required=True,
@@ -88,9 +86,8 @@ class InterchangeHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.isa01)
 
-        self.isa02: Element = Element(
+        self.authorization_info: Element = Element(
             name="ISA02",
             description="Authorization Information",
             required=True,
@@ -98,9 +95,8 @@ class InterchangeHeader(Segment):
             max_length=10,
             content="",
         )
-        self.fields.append(self.isa02)
 
-        self.isa03: Element = Element(
+        self.security_info_qualifier: Element = Element(
             name="ISA03",
             description="Security Information Qualifier",
             required=True,
@@ -108,9 +104,8 @@ class InterchangeHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.isa03)
 
-        self.isa04: Element = Element(
+        self.security_info: Element = Element(
             name="ISA04",
             description="Security Information",
             required=True,
@@ -118,9 +113,8 @@ class InterchangeHeader(Segment):
             max_length=10,
             content="",
         )
-        self.fields.append(self.isa04)
 
-        self.isa05: Element = Element(
+        self.sender_id_qualifier: Element = Element(
             name="ISA05",
             description="Interchange ID Qualifier",
             required=True,
@@ -128,9 +122,8 @@ class InterchangeHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.isa05)
 
-        self.isa06: Element = Element(
+        self.sender_id = Element(
             name="ISA06",
             description="Interchange Sender ID",
             required=True,
@@ -138,9 +131,8 @@ class InterchangeHeader(Segment):
             max_length=15,
             content="",
         )
-        self.fields.append(self.isa06)
 
-        self.isa07: Element = Element(
+        self.receiver_id_qualifier: Element = Element(
             name="ISA07",
             description="Interchange ID Qualifier",
             required=True,
@@ -148,9 +140,8 @@ class InterchangeHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.isa07)
 
-        self.isa08: Element = Element(
+        self.receiver_id: Element = Element(
             name="ISA08",
             description="Interchange Receiver ID",
             required=True,
@@ -158,9 +149,8 @@ class InterchangeHeader(Segment):
             max_length=15,
             content="",
         )
-        self.fields.append(self.isa08)
 
-        self.isa09: Element = Element(
+        self.date: Element = Element(
             name="ISA09",
             description="Interchange Date",
             required=True,
@@ -168,9 +158,8 @@ class InterchangeHeader(Segment):
             max_length=6,
             content="",
         )
-        self.fields.append(self.isa09)
 
-        self.isa10: Element = Element(
+        self.time: Element = Element(
             name="ISA10",
             description="Interchange Time",
             required=True,
@@ -178,19 +167,17 @@ class InterchangeHeader(Segment):
             max_length=4,
             content="",
         )
-        self.fields.append(self.isa10)
 
-        self.isa11: Element = Element(
+        self.repetition_separator: Element = Element(
             name="ISA11",
-            description="Interchange Control Standard ID",
+            description="Repetition Separator",
             required=True,
             min_length=1,
             max_length=1,
             content="",
         )
-        self.fields.append(self.isa11)
 
-        self.isa12: Element = Element(
+        self.control_version: Element = Element(
             name="ISA12",
             description="Interchange Control Version Number",
             required=True,
@@ -198,9 +185,8 @@ class InterchangeHeader(Segment):
             max_length=5,
             content="",
         )
-        self.fields.append(self.isa12)
 
-        self.isa13: Element = Element(
+        self.control_number: Element = Element(
             name="ISA13",
             description="Interchange Control Number",
             required=True,
@@ -208,45 +194,93 @@ class InterchangeHeader(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.isa13)
 
-        self.isa14: Element = Element(
+        self.acknowledgement_requested: Element = Element(
             name="ISA14",
-            description="Acknowledgement Requested Flag",
+            description="Acknowledgement Requested",
             required=True,
             min_length=1,
             max_length=1,
             content="",
         )
-        self.fields.append(self.isa14)
 
-        self.isa15: Element = Element(
+        self.usage_indicator: Element = Element(
             name="ISA15",
-            description="Test Indicator",
+            description="Interchange Usage Indicator",
             required=True,
             min_length=1,
             max_length=1,
             content="",
         )
-        self.fields.append(self.isa15)
 
-        self.isa16: Element = Element(
+        self.component_element_separator: Element = Element(
             name="ISA16",
-            description="Sub-element Separator",
+            description="Component Element Separator",
             required=True,
             min_length=1,
             max_length=1,
             content="",
         )
-        self.fields.append(self.isa16)
+
+        self.isa01: Element = self.authorization_info_qualifier
+        self.isa02: Element = self.authorization_info
+        self.isa03: Element = self.security_info_qualifier
+        self.isa04: Element = self.security_info
+        self.isa05: Element = self.sender_id_qualifier
+        self.isa06: Element = self.sender_id
+        self.isa07: Element = self.receiver_id_qualifier
+        self.isa08: Element = self.receiver_id
+        self.isa09: Element = self.date
+        self.isa10: Element = self.time
+        self.isa11: Element = self.repetition_separator
+        self.isa12: Element = self.control_version
+        self.isa13: Element = self.control_number
+        self.isa14: Element = self.acknowledgement_requested
+        self.isa15: Element = self.usage_indicator
+        self.isa16: Element = self.component_element_separator
+
+        self.fields.extend(
+            (
+                self.id,
+                self.isa01,
+                self.isa02,
+                self.isa03,
+                self.isa04,
+                self.isa05,
+                self.isa06,
+                self.isa07,
+                self.isa08,
+                self.isa09,
+                self.isa10,
+                self.isa11,
+                self.isa12,
+                self.isa13,
+                self.isa14,
+                self.isa15,
+                self.isa16,
+            )
+        )
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [val.to_dict() for val in self.fields],
-            "element_separator": self.element_separator,
-            "segment_terminator": self.segment_terminator,
-            "sub_element_separator": self.sub_element_separator,
+            "id": self.id.to_dict(),
+            "authorization_info_qualifier": self.authorization_info_qualifier.to_dict(),
+            "authorization_info": self.authorization_info.to_dict(),
+            "security_info_qualifier": self.security_info_qualifier.to_dict(),
+            "security_info": self.security_info.to_dict(),
+            "sender_id_qualifier": self.sender_id_qualifier.to_dict(),
+            "sender_id": self.sender_id.to_dict(),
+            "receiver_id_qualifier": self.receiver_id_qualifier.to_dict(),
+            "receiver_id": self.receiver_id.to_dict(),
+            "date": self.date.to_dict(),
+            "time": self.time.to_dict(),
+            "repetition_separator": self.repetition_separator.to_dict(),
+            "control_version": self.control_version.to_dict(),
+            "control_number": self.control_number.to_dict(),
+            "acknowledgement_requested": self.acknowledgement_requested.to_dict(),
+            "usage_indicator": self.usage_indicator.to_dict(),
+            "component_element_separator": self.component_element_separator.to_dict(),
         }
 
 
@@ -265,19 +299,17 @@ class InterchangeTrailer(Segment):
             max_length=3,
             content="",
         )
-        self.fields.append(self.id)
 
-        self.iea01: Element = Element(
+        self.group_count: Element = Element(
             name="IEA01",
-            description="Number of Included Groups",
+            description="Number of Included Functional Groups",
             required=True,
             min_length=1,
             max_length=5,
             content="",
         )
-        self.fields.append(self.iea01)
 
-        self.iea02: Element = Element(
+        self.control_number: Element = Element(
             name="IEA02",
             description="Interchange Control Number",
             required=True,
@@ -285,13 +317,16 @@ class InterchangeTrailer(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.iea02)
+
+        self.iea01: Element = self.group_count
+        self.iea02: Element = self.control_number
+
+        self.fields.extend((self.id, self.iea01, self.iea02))
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [val.to_dict() for val in self.fields],
-            "element_separator": self.element_separator,
-            "segment_terminator": self.segment_terminator,
-            "sub_element_separator": self.sub_element_separator,
+            "id": self.id.to_dict(),
+            "group_count": self.group_count.to_dict(),
+            "control_number": self.control_number.to_dict(),
         }

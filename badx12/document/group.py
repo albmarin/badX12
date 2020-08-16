@@ -59,7 +59,6 @@ class Group(GroupEnvelope):
         return {
             "header": self.header.to_dict(),
             "trailer": self.trailer.to_dict(),
-            "body": [item.to_dict() for item in self.body],
             "transaction_sets": [item.to_dict() for item in self.transaction_sets],
         }
 
@@ -79,9 +78,8 @@ class GroupHeader(Segment):
             max_length=2,
             content="GS",
         )
-        self.fields.append(self.id)
 
-        self.gs01: Element = Element(
+        self.identifier_code: Element = Element(
             name="GS01",
             description="Functional Identifier Code",
             required=True,
@@ -89,29 +87,26 @@ class GroupHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.gs01)
 
-        self.gs02: Element = Element(
+        self.sender_code: Element = Element(
             name="GS02",
-            description="Application Senders Code",
+            description="Application Sender's Code",
             required=True,
             min_length=2,
             max_length=15,
             content="",
         )
-        self.fields.append(self.gs02)
 
-        self.gs03: Element = Element(
+        self.receiver_code: Element = Element(
             name="GS03",
-            description="Application Receiver Code",
+            description="Application Receiver's Code",
             required=True,
             min_length=2,
             max_length=15,
             content="",
         )
-        self.fields.append(self.gs03)
 
-        self.gs04: Element = Element(
+        self.date: Element = Element(
             name="GS04",
             description="Group Date",
             required=True,
@@ -119,9 +114,8 @@ class GroupHeader(Segment):
             max_length=8,
             content="",
         )
-        self.fields.append(self.gs04)
 
-        self.gs05: Element = Element(
+        self.time: Element = Element(
             name="GS05",
             description="Group Time",
             required=True,
@@ -129,9 +123,8 @@ class GroupHeader(Segment):
             max_length=4,
             content="",
         )
-        self.fields.append(self.gs05)
 
-        self.gs06: Element = Element(
+        self.control_number: Element = Element(
             name="GS06",
             description="Group Control Number",
             required=True,
@@ -139,9 +132,8 @@ class GroupHeader(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.gs06)
 
-        self.gs07: Element = Element(
+        self.agency_code: Element = Element(
             name="GS07",
             description="Responsible Agency Code",
             required=True,
@@ -149,25 +141,51 @@ class GroupHeader(Segment):
             max_length=2,
             content="",
         )
-        self.fields.append(self.gs07)
 
-        self.gs08: Element = Element(
+        self.version_code: Element = Element(
             name="GS08",
-            description="Version Indicator ID Code",
+            description="Version / Release / Industry Identifier Code",
             required=True,
             min_length=1,
             max_length=12,
             content="",
         )
-        self.fields.append(self.gs08)
+
+        self.gs01: Element = self.identifier_code
+        self.gs02: Element = self.sender_code
+        self.gs03: Element = self.receiver_code
+        self.gs04: Element = self.date
+        self.gs05: Element = self.time
+        self.gs06: Element = self.control_number
+        self.gs07: Element = self.agency_code
+        self.gs08: Element = self.version_code
+
+        self.fields.extend(
+            (
+                self.id,
+                self.gs01,
+                self.gs02,
+                self.gs03,
+                self.gs04,
+                self.gs05,
+                self.gs06,
+                self.gs07,
+                self.gs08,
+            )
+        )
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [field.to_dict() for field in self.fields],
-            "element_separator": self.element_separator,
-            "segment_terminator": self.segment_terminator,
-            "sub_element_separator": self.sub_element_separator,
+            "id": self.id.to_dict(),
+            "identifier_code": self.identifier_code.to_dict(),
+            "sender_code": self.sender_code.to_dict(),
+            "receiver_code": self.receiver_code.to_dict(),
+            "date": self.date.to_dict(),
+            "time": self.time.to_dict(),
+            "control_number": self.time.to_dict(),
+            "agency_code": self.agency_code.to_dict(),
+            "version_code": self.version_code.to_dict(),
         }
 
 
@@ -186,19 +204,17 @@ class GroupTrailer(Segment):
             max_length=2,
             content="GE",
         )
-        self.fields.append(self.id)
 
-        self.ge01: Element = Element(
+        self.transaction_set_count: Element = Element(
             name="GE01",
-            description="Number of Transaction Sets",
+            description="Number of Transaction Sets Included",
             required=True,
             min_length=1,
             max_length=6,
             content="",
         )
-        self.fields.append(self.ge01)
 
-        self.ge02: Element = Element(
+        self.control_number: Element = Element(
             name="GE02",
             description="Group Control Number",
             required=True,
@@ -206,13 +222,15 @@ class GroupTrailer(Segment):
             max_length=9,
             content="",
         )
-        self.fields.append(self.ge02)
+
+        self.ge01: Element = self.transaction_set_count
+        self.ge02: Element = self.control_number
+
+        self.fields.extend((self.id, self.ge01, self.ge02))
 
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [field.to_dict() for field in self.fields],
-            "element_separator": self.element_separator,
-            "segment_terminator": self.segment_terminator,
-            "sub_element_separator": self.sub_element_separator,
+            "transaction_set_count": self.transaction_set_count.to_dict(),
+            "control_number": self.control_number.to_dict(),
         }

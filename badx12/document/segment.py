@@ -71,10 +71,8 @@ class Segment(object):
     def to_dict(self) -> dict:
         return {
             "field_count": self.field_count,
-            "fields": [field.to_dict() for field in self.fields],
-            "element_separator": self.element_separator,
-            "segment_terminator": self.segment_terminator,
-            "sub_element_separator": self.sub_element_separator,
+            "id": self.id.to_dict(),
+            **{field.name: field.to_dict() for field in self.fields[1:]},
         }
 
     def __str__(self) -> str:
@@ -88,7 +86,7 @@ class Segment(object):
     def __repr__(self) -> str:
         out = f"{self.__class__.__name__}("
         for field, has_more in lookahead(self.fields):
-            out += f"{field.name}={field.__repr__()}"
+            out += f"{field.name}={repr(field)}"
             if has_more:
                 out += ", "
 

@@ -59,7 +59,6 @@ class Envelope(object):
         return {
             "header": self.header.to_dict(),
             "trailer": self.trailer.to_dict(),
-            "body": [item.to_dict() for item in self.body],
         }
 
     def __repr__(self) -> str:
@@ -69,7 +68,7 @@ class Envelope(object):
         out += "body=("
         for item, has_more in lookahead(self.body):
             if not issubclass(item.__class__, Envelope):
-                out += f"{item.id}={repr(item)}"
+                out += f"{item.id.name}={repr(item)}"
 
             else:
                 out += f"{item.__class__.__name__}={repr(item)}"

@@ -58,6 +58,9 @@ dev = [
 ]
 all = []
 
+[tool.flit.scripts]
+badx12 = "badx12.__main__:cli"
+
 [tool.black]
 line-length = 88
 include = '\.pyi?$'

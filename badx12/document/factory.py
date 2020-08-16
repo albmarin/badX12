@@ -34,11 +34,9 @@ class EDIDocument:
 
     def to_dict(self) -> dict:
         return {
-            "document": {
-                "text": self.text,
-                "config": self.config.to_dict(),
-                "interchange": self.interchange.to_dict(),
-            }
+            "text": self.text,
+            "config": self.config.to_dict(),
+            "interchange": self.interchange.to_dict(),
         }
 
     def __repr__(self) -> str:

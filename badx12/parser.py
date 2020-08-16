@@ -131,36 +131,6 @@ class Parser:
         for index, value in enumerate(segment_field_list):
             segment.fields[index].content = value
 
-    def _create_generic_element(self, index: int, value: str) -> Element:
-        """
-        Create a generic element based on the data found. Populate all the
-        fields so that validation will pass.
-        :param index: the position of the element for providing a name.
-        :param value: the content for the element being created.
-        :return: a generic element.
-        """
-        element: Element = Element()
-        element.name = "GEN" + str(index)
-        element.content = value
-        element.description = "A generic element created by the parser"
-        element.required = False
-        length: int = len(value)
-        element.min_length = length
-        element.max_length = length
-        return element
-
-    def _parse__unknown_segment(
-        self, segment: Segment, segment_field_list: List[str]
-    ) -> None:
-        """Generically parse unknown segments by creating a
-        new element and appending it to the segment.
-        :param segment: the segment to append the values.
-        :param segment_field_list: the list of segments to parse.
-        """
-        for index, value in enumerate(segment_field_list):
-            element: Element = self._create_generic_element(index, value)
-            segment.fields.append(element)
-
     def _parse_group_header(self, segment: str) -> None:
         """Parse the group header"""
         self.current_group = Group()
@@ -224,3 +194,42 @@ class Parser:
                 self.current_transaction.transaction_body.append(generic_segment)
             except AttributeError:
                 pass
+
+    def _parse__unknown_segment(
+        self, segment: Segment, segment_field_list: List[str]
+    ) -> None:
+        """Generically parse unknown segments by creating a
+        new element and appending it to the segment.
+        :param segment: the segment to append the values.
+        :param segment_field_list: the list of segments to parse.
+        """
+        for index, value in enumerate(segment_field_list):
+            element: Element = self._create_generic_element(
+                index, value, segment_field_list[0]
+            )
+            segment.fields.append(element)
+
+        segment.id = segment.fields[0]
+        segment.field_count = len(segment.fields)
+
+    def _create_generic_element(self, index: int, value: str, name: str) -> Element:
+        """
+        Create a generic element based on the data found. Populate all the
+        fields so that validation will pass.
+        :param index: the position of the element for providing a name.
+        :param value: the content for the element being created.
+        :return: a generic element.
+        """
+        element: Element = Element()
+        element.name = name
+
+        if index > 0:
+            element.name = f"{name}{str(index).zfill(2)}"
+
+        element.content = value
+        element.description = "A generic element created by the parser"
+        element.required = False
+        length: int = len(value)
+        element.min_length = length
+        element.max_length = length
+        return element
