@@ -2,7 +2,7 @@
 
 [![PyPi](https://img.shields.io/pypi/v/badX12.svg)](https://pypi.python.org/pypi/badX12)
 [![Coverage](https://codecov.io/gh/albmarin/badX12/branch/master/graph/badge.svg)](https://codecov.io/gh/albmarin/badX12)
-[![Build Status](https://img.shields.io/travis/albmarin/badX12.svg)](https://travis-ci.org/albmarin/badX12)
+[![Build Status](https://travis-ci.org/albmarin/badX12.svg?branch=master)](https://travis-ci.org/albmarin/badX12)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
 
