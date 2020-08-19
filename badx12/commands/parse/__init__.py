@@ -5,10 +5,16 @@ from typing import List, Union
 
 import click
 
-from badx12 import exceptions as err
 from badx12.common.paths import OUTPUT_DIR
 from badx12.document import EDIDocument, ValidationReport
-from badx12.parser import Parser
+from badx12.exceptions import (
+    FieldValidationError,
+    IDMismatchError,
+    InvalidFileTypeError,
+    SegmentCountError,
+    SegmentTerminatorNotFoundError,
+)
+from badx12.parsers.M271_005010X279A1 import Parser
 
 from .utils import export_file
 
@@ -57,10 +63,10 @@ def parse(
             export_file(doc_dict, export_type, output_dir)
 
         except (
-            err.InvalidFileTypeError,
-            err.FieldValidationError,
-            err.SegmentCountError,
-            err.IDMismatchError,
-            err.SegmentTerminatorNotFoundError,
+            InvalidFileTypeError,
+            FieldValidationError,
+            SegmentCountError,
+            IDMismatchError,
+            SegmentTerminatorNotFoundError,
         ) as e:
             logger.error(f"{f} caused the following error. Exception: {e.msg}")

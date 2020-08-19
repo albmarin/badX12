@@ -44,11 +44,12 @@ class TransactionSet(TransactionSetEnvelope):
         Validate the actual group count matches the specified count.
         :param report: the validation report to append errors.
         """
+        segment_count: int = self.number_of_segments()
         if int(self.trailer.se01.content) != self.number_of_segments():
             report.add_error(
                 SegmentCountError(
                     msg=f"""The {self.trailer.se01.description} in {self.trailer.se01.name} value of
-                    {self.trailer.se01.content} does not match the parsed count of {len(self.transaction_body)}""",
+                    {self.trailer.se01.content} does not match the parsed count of {segment_count}""",
                     segment=self.trailer.id,
                 )
             )

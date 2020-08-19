@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import ChainMap
 from pathlib import Path
 from typing import List, Optional
 
@@ -20,6 +21,18 @@ class Parser:
         """
         self.document: EDIDocument = EDIDocument()
         self.document_text: str = ""
+
+        self._default_segment_functions: dict = {
+            GroupHeader().id.name: self._parse_group_header,
+            GroupTrailer().id.name: self._parse_group_trailer,
+            TransactionSetHeader().id.name: self._parse_transaction_set_header,
+            TransactionSetTrailer().id.name: self._parse_transaction_set_trailer,
+            EDIDocument().interchange.trailer.id.name: self._parse_interchange_trailer,
+        }
+
+        self.segment_functions: ChainMap = ChainMap(
+            self._default_segment_functions, self._get_segment_functions()
+        )
 
         if document is not None:
             self.parse_document(document)
@@ -46,6 +59,9 @@ class Parser:
             )
 
         return self.document
+
+    def _get_segment_functions(self) -> dict:
+        return self._default_segment_functions
 
     def _validate_document(self, document: str) -> str:
         try:
@@ -103,18 +119,15 @@ class Parser:
         """Take a generic segment and determine what segment to parse it as
         :param segment:
         """
-        if segment.startswith(InterchangeHeader().id.name):
+        segment_func = self.segment_functions.get(
+            segment.split(self.document.config.element_separator)[0]
+        )
+        if segment_func is not None:
+            segment_func(segment)
+
+        elif segment.startswith(InterchangeHeader().id.name):
             pass
-        elif segment.startswith(GroupHeader().id.name):
-            self._parse_group_header(segment)
-        elif segment.startswith(GroupTrailer().id.name):
-            self._parse_group_trailer(segment)
-        elif segment.startswith(TransactionSetHeader().id.name):
-            self._parse_transaction_set_header(segment)
-        elif segment.startswith(TransactionSetTrailer().id.name):
-            self._parse_transaction_set_trailer(segment)
-        elif segment.startswith(EDIDocument().interchange.trailer.id.name):
-            self._parse_interchange_trailer(segment)
+
         else:
             self._parse_unknown_body(segment)
 

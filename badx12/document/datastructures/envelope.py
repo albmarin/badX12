@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from typing import List
+
 from badx12.common.helpers import lookahead
 from badx12.document.settings import DocumentConfiguration
 from badx12.document.validators import ValidationReport
 
-from .segment import Segment
+from .segment import GenericHierarchyLevel, GenericNameSegment, Segment
 
 
 class Envelope(object):
@@ -102,3 +104,53 @@ class TransactionSetEnvelope(Envelope):
     def number_of_segments(self) -> int:
         header_trailer_count: int = 2
         return len(self.transaction_body) + header_trailer_count
+
+
+class GenericLoopEnvelope(Envelope):
+    """Generic Loop"""
+
+    def __init__(self) -> None:
+        Envelope.__init__(self)
+        self.name: GenericNameSegment = GenericNameSegment()
+        self.hierarchical_level: GenericHierarchyLevel = GenericHierarchyLevel()
+        self.request_validations: list = []
+        self.loop_body: list = self.body
+
+    def number_of_segments(self) -> int:
+        header_trailer_count: int = 2
+        inner_loop_count: int = 0
+
+        for loop in self.loop_body:
+            if isinstance(loop, GenericLoopEnvelope):
+                inner_loop_count += loop.number_of_segments()
+
+        return len(self.request_validations) + header_trailer_count + inner_loop_count
+
+
+class InformationSourceLoopEnvelope(GenericLoopEnvelope):
+    """Loop 2000A"""
+
+    def __init__(self) -> None:
+        GenericLoopEnvelope.__init__(self)
+        self.receivers: list = self.body
+
+
+class InformationReceiverLoopEnvelope(GenericLoopEnvelope):
+    """Loop 2000B"""
+
+    def __init__(self) -> None:
+        GenericLoopEnvelope.__init__(self)
+
+
+class SubscriberLoopEnvelope(GenericLoopEnvelope):
+    """Loop 2000C"""
+
+    def __init__(self) -> None:
+        GenericLoopEnvelope.__init__(self)
+
+
+class DependentLoopEnvelope(GenericLoopEnvelope):
+    """Loop 2000D"""
+
+    def __init__(self) -> None:
+        GenericLoopEnvelope.__init__(self)
