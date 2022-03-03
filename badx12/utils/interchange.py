@@ -21,6 +21,7 @@ class Interchange(InterchangeEnvelope):
         self.n4 = InterchangeN4()
         self.txi = InterchangeTXI()
         self.it1 = InterchangeIT1()
+        self.sac = InterchangeSAC()
 
     def validate(self, report):
         """
@@ -737,7 +738,6 @@ class InterchangeIT1(Segment):
         }
 
 
-
 class InterchangeTXI(Segment):
     """An EDI X12 interchange TXI"""
 
@@ -778,12 +778,199 @@ class InterchangeTXI(Segment):
         self.txi03 = Element(
             name="TXI03",
             description="Percent",
-            required=False,
+            required=True,
             min_length=1,
             max_length=10,
             content="",
         )
         self.fields.append(self.txi03)
+
+    def to_dict(self):
+        return {
+            "field_count": self.field_count,
+            "fields": [val.to_dict() for val in self.fields],
+            "element_separator": self.element_separator,
+            "segment_terminator": self.segment_terminator,
+            "sub_element_separator": self.sub_element_separator,
+        }
+
+
+class InterchangeSAC(Segment):
+    """An EDI X12 interchange SAC"""
+
+    def __init__(self):
+        Segment.__init__(self)
+        self.field_count = 16
+
+        self.id = Element(
+            name="SAC",
+            description="Service, Promotion, Allowance, Charge Information",
+            required=True,
+            min_length=3,
+            max_length=3,
+            content="",
+        )
+        self.fields.append(self.id)
+
+        self.sac01 = Element(
+            name="SAC01",
+            description="Allowance or Charge Indicator",
+            required=True,
+            min_length=1,
+            max_length=1,
+            content="",
+        )
+        self.fields.append(self.sac01)
+
+        self.sac02 = Element(
+            name="SAC02",
+            description="Service, Promotion, Allowance, or Charge Code",
+            required=True,
+            min_length=4,
+            max_length=4,
+            content="",
+        )
+        self.fields.append(self.sac02)
+
+        self.sac03 = Element(
+            name="SAC03",
+            description="Agency Qualifier Code",
+            required=False,
+            min_length=2,
+            max_length=2,
+            content="",
+        )
+        self.fields.append(self.sac03)
+
+        self.sac04 = Element(
+            name="SAC04",
+            description="Agency Service, Promotion, Allowance, or Charge Code",
+            required=False,
+            min_length=1,
+            max_length=10,
+            content="",
+        )
+        self.fields.append(self.sac04)
+
+        self.sac05 = Element(
+            name="SAC05",
+            description="Amount",
+            required=True,
+            min_length=1,
+            max_length=15,
+            content="",
+        )
+        self.fields.append(self.sac05)
+
+        self.sac06 = Element(
+            name="SAC06",
+            description="Allowance/Charge Percent Qualifier",
+            required=False,
+            min_length=1,
+            max_length=1,
+            content="",
+        )
+        self.fields.append(self.sac06)
+
+        self.sac07 = Element(
+            name="SAC07",
+            description="Percent",
+            required=True,
+            min_length=1,
+            max_length=6,
+            content="",
+        )
+        self.fields.append(self.sac07)
+
+        self.sac08 = Element(
+            name="SAC08",
+            description="Rate",
+            required=True,
+            min_length=1,
+            max_length=9,
+            content="",
+        )
+        self.fields.append(self.sac08)
+
+        self.sac09 = Element(
+            name="SAC09",
+            description="Unit or Basis for Measurement Code",
+            required=False,
+            min_length=2,
+            max_length=2,
+            content="",
+        )
+        self.fields.append(self.sac09)
+
+        self.sac10 = Element(
+            name="SAC10",
+            description="Quantity",
+            required=False,
+            min_length=1,
+            max_length=15,
+            content="",
+        )
+        self.fields.append(self.sac10)
+
+        self.sac11 = Element(
+            name="SAC11",
+            description="Quantity",
+            required=False,
+            min_length=1,
+            max_length=15,
+            content="",
+        )
+        self.fields.append(self.sac11)
+
+        self.sac12 = Element(
+            name="SAC12",
+            description="Allowance or Charge Method of Handling Code",
+            required=True,
+            min_length=2,
+            max_length=2,
+            content="",
+        )
+        self.fields.append(self.sac12)
+
+        self.sac13 = Element(
+            name="SAC13",
+            description="Reference Identification",
+            required=False,
+            min_length=1,
+            max_length=30,
+            content="",
+        )
+        self.fields.append(self.sac13)
+
+        self.sac14 = Element(
+            name="SAC14",
+            description="Option Number",
+            required=False,
+            min_length=1,
+            max_length=20,
+            content="",
+        )
+        self.fields.append(self.sac14)
+
+        self.sac15 = Element(
+            name="SAC15",
+            description="Description",
+            required=False,
+            min_length=1,
+            max_length=80,
+            content="",
+        )
+        self.fields.append(self.sac15)
+
+        self.sac16 = Element(
+            name="SAC16",
+            description="Language Code",
+            required=False,
+            min_length=2,
+            max_length=3,
+            content="",
+        )
+        self.fields.append(self.sac16)
 
     def to_dict(self):
         return {

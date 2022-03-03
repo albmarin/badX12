@@ -17,6 +17,7 @@ from .interchange import (
     InterchangeN3,
     InterchangeN4,
     InterchangeIT1,
-    InterchangeTXI
+    InterchangeTXI,
+    InterchangeSAC
 )
 from .segment import Segment

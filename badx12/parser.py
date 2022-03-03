@@ -12,7 +12,8 @@ from badx12.utils import (
     InterchangeN3,
     InterchangeN4,
     InterchangeIT1,
-    InterchangeTXI
+    InterchangeTXI,
+    InterchangeSAC
 )
 from badx12.utils.errors import InvalidFileTypeError, SegmentTerminatorNotFoundError
 from badx12.utils.group import Group, GroupHeader, GroupTrailer
@@ -139,6 +140,8 @@ class Parser:
             self._parse_interchange_it1(segment)
         elif segment.startswith(InterchangeTXI().id.name):
             self._parse_interchange_txi(segment)
+        elif segment.startswith(InterchangeSAC().id.name):
+            self._parse_interchange_sac(segment)
         else:
             self._parse_unknown_body(segment)
 
@@ -221,6 +224,11 @@ class Parser:
         txi = self.document.interchange.txi
         txi_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(txi, txi_field_list)
+
+    def _parse_interchange_sac(self, segment):
+        sac = self.document.interchange.sac
+        sac_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(sac, sac_field_list)
 
     def _parse_group_trailer(self, segment):
         """Parse the group trailer"""
