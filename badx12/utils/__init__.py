@@ -7,5 +7,16 @@ from .envelope import (
     TransactionSetEnvelope,
 )
 from .errors import FieldValidationError, IDMismatchError, SegmentCountError
-from .interchange import Interchange, InterchangeHeader, InterchangeTrailer
+from .interchange import (
+    Interchange,
+    InterchangeHeader,
+    InterchangeTrailer,
+    InterchangeBIG,
+    InterchangeREF,
+    InterchangeN1,
+    InterchangeN3,
+    InterchangeN4,
+    InterchangeIT1,
+    InterchangeTXI
+)
 from .segment import Segment

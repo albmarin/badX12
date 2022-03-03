@@ -2,7 +2,18 @@
 from pathlib import Path
 
 from badx12.document import EDIDocument
-from badx12.utils import Element, InterchangeHeader, Segment
+from badx12.utils import (
+    Element,
+    InterchangeHeader,
+    Segment,
+    InterchangeBIG,
+    InterchangeREF,
+    InterchangeN1,
+    InterchangeN3,
+    InterchangeN4,
+    InterchangeIT1,
+    InterchangeTXI
+)
 from badx12.utils.errors import InvalidFileTypeError, SegmentTerminatorNotFoundError
 from badx12.utils.group import Group, GroupHeader, GroupTrailer
 from badx12.utils.transaction_set import (
@@ -39,9 +50,9 @@ class Parser:
             raise InvalidFileTypeError(
                 segment=found_segment,
                 msg=f"Expected Element Envelope: {EDIDocument().interchange.header.id.name} but found Element "
-                f"Envelope: {found_segment}.\n The length of the expected segment is: "
-                f"{str(len(EDIDocument().interchange.header.id.name))} the length of the segment found was: "
-                f"{str(len(found_segment))}",
+                    f"Envelope: {found_segment}.\n The length of the expected segment is: "
+                    f"{str(len(EDIDocument().interchange.header.id.name))} the length of the segment found was: "
+                    f"{str(len(found_segment))}",
             )
 
         return self.document
@@ -114,6 +125,20 @@ class Parser:
             self._parse_transaction_set_trailer(segment)
         elif segment.startswith(EDIDocument().interchange.trailer.id.name):
             self._parse_interchange_trailer(segment)
+        elif segment.startswith(InterchangeBIG().id.name):
+            self._parse_interchange_big(segment)
+        elif segment.startswith(InterchangeREF().id.name):
+            self._parse_interchange_ref(segment)
+        elif segment.startswith(InterchangeN1().id.name):
+            self._parse_interchange_n1(segment)
+        elif segment.startswith(InterchangeN3().id.name):
+            self._parse_interchange_n3(segment)
+        elif segment.startswith(InterchangeN4().id.name):
+            self._parse_interchange_n4(segment)
+        elif segment.startswith(InterchangeIT1().id.name):
+            self._parse_interchange_it1(segment)
+        elif segment.startswith(InterchangeTXI().id.name):
+            self._parse_interchange_txi(segment)
         else:
             self._parse_unknown_body(segment)
 
@@ -133,6 +158,7 @@ class Parser:
         :param value: the content for the element being created.
         :return: a generic element.
         """
+
         element = Element()
         element.name = "GEN" + str(index)
         element.content = value
@@ -160,6 +186,41 @@ class Parser:
         header_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(header, header_field_list)
         self.current_group.header = header
+
+    def _parse_interchange_big(self, segment):
+        big = self.document.interchange.big
+        big_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(big, big_field_list)
+
+    def _parse_interchange_ref(self, segment):
+        ref = self.document.interchange.ref
+        ref_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(ref, ref_field_list)
+
+    def _parse_interchange_n1(self, segment):
+        n1 = self.document.interchange.n1
+        n1_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(n1, n1_field_list)
+
+    def _parse_interchange_n3(self, segment):
+        n3 = self.document.interchange.n3
+        n3_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(n3, n3_field_list)
+
+    def _parse_interchange_n4(self, segment):
+        n4 = self.document.interchange.n4
+        n4_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(n4, n4_field_list)
+
+    def _parse_interchange_it1(self, segment):
+        it1 = self.document.interchange.it1
+        it1_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(it1, it1_field_list)
+
+    def _parse_interchange_txi(self, segment):
+        txi = self.document.interchange.txi
+        txi_field_list = segment.split(self.document.config.element_separator)
+        self._parse_segment(txi, txi_field_list)
 
     def _parse_group_trailer(self, segment):
         """Parse the group trailer"""
