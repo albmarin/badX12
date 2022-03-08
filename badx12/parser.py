@@ -191,44 +191,76 @@ class Parser:
         self.current_group.header = header
 
     def _parse_interchange_big(self, segment):
-        big = self.document.interchange.big
+        big = InterchangeBIG()
         big_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(big, big_field_list)
+        try:
+            self.current_transaction.body.append(big)
+        except AttributeError:
+            pass
 
     def _parse_interchange_ref(self, segment):
-        ref = self.document.interchange.ref
+        ref = InterchangeREF()
         ref_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(ref, ref_field_list)
+        try:
+            self.current_transaction.body.append(ref)
+        except AttributeError:
+            pass
 
     def _parse_interchange_n1(self, segment):
-        n1 = self.document.interchange.n1
+        n1 = InterchangeN1()
         n1_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(n1, n1_field_list)
+        try:
+            self.current_transaction.body.append(n1)
+        except AttributeError:
+            pass
 
     def _parse_interchange_n3(self, segment):
-        n3 = self.document.interchange.n3
+        n3 = InterchangeN3()
         n3_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(n3, n3_field_list)
+        try:
+            self.current_transaction.body.append(n3)
+        except AttributeError:
+            pass
 
     def _parse_interchange_n4(self, segment):
-        n4 = self.document.interchange.n4
+        n4 = InterchangeN4()
         n4_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(n4, n4_field_list)
+        try:
+            self.current_transaction.body.append(n4)
+        except AttributeError:
+            pass
 
     def _parse_interchange_it1(self, segment):
-        it1 = self.document.interchange.it1
+        it1 = InterchangeIT1()
         it1_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(it1, it1_field_list)
+        try:
+            self.current_transaction.body.append(it1)
+        except AttributeError:
+            pass
 
     def _parse_interchange_txi(self, segment):
-        txi = self.document.interchange.txi
+        txi = InterchangeTXI()
         txi_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(txi, txi_field_list)
+        try:
+            self.current_transaction.body.append(txi)
+        except AttributeError:
+            pass
 
     def _parse_interchange_sac(self, segment):
-        sac = self.document.interchange.sac
+        sac = InterchangeSAC()
         sac_field_list = segment.split(self.document.config.element_separator)
         self._parse_segment(sac, sac_field_list)
+        try:
+            self.current_transaction.body.append(sac)
+        except AttributeError:
+            pass
 
     def _parse_group_trailer(self, segment):
         """Parse the group trailer"""

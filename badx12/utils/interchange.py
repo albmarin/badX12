@@ -785,6 +785,36 @@ class InterchangeTXI(Segment):
         )
         self.fields.append(self.txi03)
 
+        self.txi04 = Element(
+            name="TXI04",
+            description="Unknown",
+            required=False,
+            min_length=1,
+            max_length=100,
+            content="",
+        )
+        self.fields.append(self.txi03)
+
+        self.txi05 = Element(
+            name="TXI05",
+            description="Unknown",
+            required=False,
+            min_length=1,
+            max_length=100,
+            content="",
+        )
+        self.fields.append(self.txi03)
+
+        self.txi06 = Element(
+            name="TXI06",
+            description="Unknown",
+            required=False,
+            min_length=1,
+            max_length=100,
+            content="",
+        )
+        self.fields.append(self.txi03)
+
     def to_dict(self):
         return {
             "field_count": self.field_count,
